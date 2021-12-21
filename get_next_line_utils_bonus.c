@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maamer <maamer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 16:58:01 by maamer            #+#    #+#             */
-/*   Updated: 2021/12/19 18:43:33 by maamer           ###   ########.fr       */
+/*   Updated: 2021/12/21 14:11:08 by maamer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
@@ -46,9 +46,9 @@ char	*ft_strchr(const char *s, int c)
 	char	*k;
 	int		i;
 
+	i = 0;
 	if (!s)
 		return (NULL);
-	i = 0;
 	k = (char *)s;
 	c = (char)c;
 	if (c == '\0')

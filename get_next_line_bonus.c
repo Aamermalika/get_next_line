@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maamer <maamer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 17:30:46 by maamer            #+#    #+#             */
-/*   Updated: 2021/12/21 12:38:57 by maamer           ###   ########.fr       */
+/*   Created: 2021/12/21 12:29:33 by maamer            #+#    #+#             */
+/*   Updated: 2021/12/21 14:15:47 by maamer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *str)
 {
@@ -59,14 +58,14 @@ char	*lba9i(char *str)
 
 char	*readfile(int fd)
 {
-	static char	*str;
+	static char	*str[1024];
 	char		*line;
 	char		*buf;
 	int			read_size;
 
 	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	read_size = 1;
-	while (read_size && !(ft_strchr(str, '\n')))
+	while (read_size && !(ft_strchr(str[fd], '\n')))
 	{
 		read_size = read(fd, buf, BUFFER_SIZE);
 		if (read_size == -1)
@@ -75,19 +74,19 @@ char	*readfile(int fd)
 			return (0);
 		}
 		buf[read_size] = '\0';
-		str = ft_strjoin(str, buf);
+		str[fd] = ft_strjoin(str[fd], buf);
 	}
 	free (buf);
-	if (read_size == 0 && (!str || !str[0]))
+	if (read_size == 0 && !str[fd])
 		return (0);
-	line = print_line(str);
-	str = lba9i(str);
+	line = print_line(str[fd]);
+	str[fd] = lba9i(str[fd]);
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 || fd >= 1024)
 		return (NULL);
 	return (readfile(fd));
 }
